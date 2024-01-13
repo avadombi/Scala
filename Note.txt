@@ -1,0 +1,29 @@
+Etapes:
+1) git init
+2) git config --global user.name username
+git config --global user.email useremail
+2) git add .
+3) git comit -m "my message"
+4) git remote add url
+5) git push origin main
+S'il y a l'erreur suivante alors passer à l'étape 6:
+	git push -u origin main remote: Permission to userA/Scala.git 	denied to userB. fatal: unable to access 	'https://github.com/userA/Scala.git/': The requested URL 	returned error: 403
+
+6) git push https://avadombi@github.com/avadombi/Scala.git branchLocal:branchRemote
+Si error encore comme celle-ci, passer à 7:
+	To https://github.com/avadombi/Scala.git
+ 	! [rejected]        main -> main (non-fast-forward)
+	error: failed to push some refs to 	'https://github.com/avadombi/Scala.git'
+	hint: Updates were rejected because the tip of your current 	branch is behind
+	hint: its remote counterpart. If you want to integrate the 	remote changes,
+	hint: use 'git pull' before pushing again.
+	hint: See the 'Note about fast-forwards' in 'git push --help' 	for details.
+
+7) git pull origin main
+Si erreur comme celle-ci, passer à 8:
+	From https://github.com/avadombi/Scala
+ 	* branch            main       -> FETCH_HEAD
+	fatal: refusing to merge unrelated histories
+
+8) git pull origin main --allow-unrelated-histories
+9) git push -u origin main
