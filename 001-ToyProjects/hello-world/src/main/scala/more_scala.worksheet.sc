@@ -47,3 +47,39 @@ z match {
     case b if  10 to 19 contains b => println(s"10-19 range: $b")
     case _ => println("Hmmm...")
 }
+
+
+/* 
+Auxiliary constructors
+*/
+
+import java.time.* 
+
+// primary constructor
+class Student(var name: String, var govtId: String) {
+    private var _applicationDate: Option[LocalDate] = None
+    private var _studentId: Int = 0
+
+    // a constructor for when the student has completed its application
+    def this(name: String, govtId: String, applicationDate: LocalDate) = {
+        this(name, govtId)
+        _applicationDate = Some(applicationDate)
+    }
+
+    // a constructor for when the student is approved and now has a student id
+    def this(name: String, govtId: String, studentId: Int) = {
+        this(name, govtId)
+        _studentId = studentId
+    }
+}
+
+val s1 = Student("Naruto", "123")
+val s2 = Student("Naruto", "123", LocalDate.now)
+val s3 = Student("Naruto", "123", 456)
+
+s3.name
+s3.govtId
+// s3._studentId will give an error bc it's a private variable
+
+
+
