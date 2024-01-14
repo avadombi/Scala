@@ -402,5 +402,69 @@ println(s"""name: "$name",
         |age: ${age}""".stripMargin)
 
 /* 
-Interpolation using s
+Interpolation using f
+Allow formating stringswith styles such as %d, %s, %2.2f etc.
  */
+
+val height = 1.9d
+val namePerson = "Naruto"
+println(f"$namePerson%s is $height%2.2f meters tall")
+println(f"3/19 is less than 20%%")
+
+/* 
+Raw interpolator: similar to s except it performs no escaping of literals within
+string.
+ */
+
+s"a\nb"
+raw"a\nb"
+
+/* 
+create our own interpolator
+ */
+
+ case class Point(x: Double, y: Double)
+
+extension (sc: StringContext) {
+    // p is our interpolator that extend StringContext
+    // StringContext is a class providing the basic mechanism to do
+    // String interpolation
+    def p(args: Double*): Point = {
+        val pts = sc.s(args: _*).split(",", 2).map(_.toDoubleOption.getOrElse(0.0))
+        Point(pts(0), pts(1))
+    }
+}
+
+val xm = 5
+val xn = 10
+
+p"1, 5"
+p"$xm, $xn"
+
+/* 
+Map = equivalent to dictionaries (key -> value)
+ */
+
+val states = Map(
+    "AK" -> "Alaska",
+    "AL" -> "Alabama",
+    "AR" -> "Arizona"
+)
+
+states("AK")
+states.keys
+states.values
+for
+    z <- states.keys
+do
+    println(z)
+
+for
+    (abb, compName) <- states
+do
+    println(s"${abb}: ${compName}")
+
+// create a vector
+val list4 = 
+    for i <- 10 to 12
+    yield i * 2
